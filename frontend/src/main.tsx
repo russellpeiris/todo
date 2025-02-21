@@ -1,12 +1,16 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App.tsx";
+import "./index.css";
 import { ConfigProvider, theme } from "antd";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { App as AntdApp } from "antd";
 
-createRoot(document.getElementById('root')!).render(
+const queryClient = new QueryClient();
+
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
-        <ConfigProvider
+    <ConfigProvider
       theme={{
         algorithm: theme.darkAlgorithm,
         components: {
@@ -52,7 +56,11 @@ createRoot(document.getElementById('root')!).render(
         },
       }}
     >
-    <App />
+      <QueryClientProvider client={queryClient}>
+        <AntdApp>
+          <App />
+        </AntdApp>
+      </QueryClientProvider>
     </ConfigProvider>
-  </StrictMode>,
-)
+  </StrictMode>
+);

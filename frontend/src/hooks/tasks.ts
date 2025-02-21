@@ -1,0 +1,58 @@
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import axios from "axios";
+import { Task } from "../App";
+import useApp from "antd/es/app/useApp";
+
+export const useGetTasks = () => {
+  const { data, error, isLoading, refetch } = useQuery({
+    queryKey: ["tasks"],
+    queryFn: async () => {
+      const response = await axios.get("http://localhost:5000/api/tasks");
+      return response.data;
+    },
+  });
+
+  return { data, error, isLoading, refetch };
+};
+
+export const useCreateTask = () => {
+  const queryClient = useQueryClient();
+  const { message } = useApp();
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: async (newTask: Task) => {
+      const response = await axios.post("http://localhost:5000/api/tasks", newTask);
+      return response.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({queryKey: ["tasks"]});
+      message.success("Task added successfully");
+    },
+    onError: () => {
+      message.error("An error occurred while creating the task");
+    },
+  });
+
+  return { mutate, isPending };
+};
+
+export const useCompleteTask = () => {
+  const queryClient = useQueryClient();
+  const { message } = useApp();
+
+  const { mutate: complete, isPending: updating } = useMutation({
+    mutationFn: async (id: number) => {
+      const response = await axios.patch(`http://localhost:5000/api/tasks/${id}`);
+      return response.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({queryKey: ["tasks"]});
+      message.success("Task marked as completed");
+    },
+    onError: () => {
+      message.error("An error occurred while completing the task");
+    },
+  });
+
+  return { complete, updating };
+};
