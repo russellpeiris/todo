@@ -18,6 +18,8 @@ services:
       context: ./frontend
     container_name: frontend-container
     restart: always
+    environment:
+      VITE_API_URL: http://localhost:5000
     ports:
       - "4173:4173"
   backend:

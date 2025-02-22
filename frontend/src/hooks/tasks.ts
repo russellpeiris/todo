@@ -8,7 +8,7 @@ export const useGetTasks = () => {
   const { data, error, isLoading } = useQuery({
     queryKey: ["tasks"],
     queryFn: async () => {
-      const response = await axios.get("http://localhost:5000/api/tasks");
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/tasks`);
       return response.data;
     },
   });
@@ -26,7 +26,7 @@ export const useCreateTask = () => {
 
   const { mutate, isPending } = useMutation({
     mutationFn: async (newTask: Task) => {
-      const response = await axios.post("http://localhost:5000/api/tasks", newTask);
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/tasks`, newTask);
       return response.data;
     },
     onSuccess: () => {
@@ -47,7 +47,7 @@ export const useCompleteTask = () => {
 
   const { mutate: complete, isPending: updating } = useMutation({
     mutationFn: async (id: number) => {
-      const response = await axios.patch(`http://localhost:5000/api/tasks/${id}`);
+      const response = await axios.patch(`${import.meta.env.VITE_API_URL}/api/tasks/${id}`);
       return response.data;
     },
     onSuccess: () => {
