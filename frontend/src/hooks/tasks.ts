@@ -1,10 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
-import { Task } from "../App";
 import useApp from "antd/es/app/useApp";
+import axios from "axios";
+import { Task } from "../interfaces";
 
 export const useGetTasks = () => {
-  const { data, error, isLoading, refetch } = useQuery({
+  const { message } = useApp();
+  const { data, error, isLoading } = useQuery({
     queryKey: ["tasks"],
     queryFn: async () => {
       const response = await axios.get("http://localhost:5000/api/tasks");
@@ -12,7 +13,11 @@ export const useGetTasks = () => {
     },
   });
 
-  return { data, error, isLoading, refetch };
+  if(error) {
+    message.error("An error occurred while fetching tasks");
+  }
+
+  return { data, isLoading };
 };
 
 export const useCreateTask = () => {
