@@ -10,10 +10,30 @@ services:
       POSTGRES_PASSWORD: root
       POSTGRES_DB: todo
     ports:
-      - "8080:5432" 
+      - "5432:5432" 
     volumes:
       - postgres_data:/var/lib/postgresql/data     
-      
+  frontend:
+    build:
+      context: ./frontend
+    container_name: frontend-container
+    restart: always
+    ports:
+      - "5173:5173"
+  backend:
+    build:
+      context: ./backend
+    container_name: backend-container
+    restart: always
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: todo
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+    ports:
+    - "5000:5000"
+
       
 
 volumes:
