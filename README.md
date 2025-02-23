@@ -3,7 +3,9 @@
 - Node.js + Express.js + Typescript on the Backend 
 - PostgreSQL as the Database
 - Jest for testing
+- Vitest for UI testing
 - Docker for containerization
+- TypeORM for ORM
 
 ### How to run the project on Docker:
 
@@ -11,7 +13,18 @@ Prerequisites:
 - Docker
 
 1. Clone the repository
+```bash
+git clone https://github.com/russellpeiris/todo.git
+```
 2. Run `docker-compose up --build` on the root folder
+
+```bash	
+├── backend
+├── frontend
+├── docker-compose.yml
+└── README.md
+```
+
 3. Access `http://localhost:4173/` on your browser
 
 ### Ant Design was used for the Frontend components
