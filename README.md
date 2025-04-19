@@ -7,6 +7,23 @@
 - Docker for containerization
 - TypeORM for ORM
 
+# Kubernetes Configuration Guide
+
+This guide provides essential tips for correctly setting up Kubernetes YAML files for production environments.
+
+## Key Points
+
+1. **Use an Ingress for Production**  
+    - An ingress is crucial for mapping a domain name to the ingress external IP address.
+    - It allows you to configure routing, prefixes, and other settings for your services.
+
+2. **Common Issues and Solutions**  
+    - **Path Rewrite**: Ensure the path rewrite is correctly configured in the ingress to avoid routing issues.  
+    - **Service Name**: Double-check that the service name is correctly specified in the deployment YAML file to ensure proper connectivity.
+
+By following these guidelines, you can avoid common pitfalls and ensure a smooth deployment process in Kubernetes.
+
+
 ### How to run the project on Docker:
 
 Prerequisites:
