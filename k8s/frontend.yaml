@@ -29,9 +29,9 @@ spec:
           image: ardpeiris/frontend:latest
           ports:
             - containerPort: 5173
-          env:
-            - name: VITE_API_URL
-              value: http://ctse-assignment.ddns.net/api
+          # env: useless adding VITE env in manifest because in vite env are set in build time only
+          #   - name: VITE_API_URL
+          #     value: api
           # resources:
           #   requests:
           #     memory: "128Mi"
