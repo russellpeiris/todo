@@ -21,7 +21,7 @@ services:
     environment:
       VITE_API_URL: http://localhost:5000
     ports:
-      - "4173:4173"
+      - "5173:5173"
   backend:
     build:
       context: ./backend

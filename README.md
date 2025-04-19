@@ -25,7 +25,7 @@ git clone https://github.com/russellpeiris/todo.git
 └── README.md
 ```
 
-3. Access `http://localhost:4173/` on your browser
+3. Access `http://localhost:5173/` on your browser
 
 ### Ant Design was used for the Frontend components
 
